@@ -54,6 +54,10 @@
         {
           t: 'Boolean false',
           d: false
+        },
+        {
+          t: 'Random object',
+          d: {a: 'Hello', b: 'World!'}
         }
       ]
 
@@ -69,7 +73,7 @@
               <td style="width:50%">
                 <code>${JSON.stringify(t.d)}</code>
               </td>
-              <td style="text-align:right">${dataguess.simple(t.d)}</td>
+              <td style="text-align:right">${humanReadable.simple(t.d)}</td>
             </tr>
           </table>`
         )
