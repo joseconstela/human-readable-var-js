@@ -139,6 +139,19 @@ table {
   border:1px solid #e5e5e5;
 }
 
+td.plain {
+  width: 50%;
+}
+
+td.result {
+  text-align: right;
+}
+
+td pre {
+  margin-bottom: 0;
+  text-align: left;
+}
+
 th {
   background: #F4F4F4;
   color: black;

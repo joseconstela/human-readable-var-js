@@ -38,7 +38,7 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    <script src="https://cdn.rawgit.com/joseconstela/human-readable-var-js/master/index.js"></script>
+    <script src="https://cdn.rawgit.com/joseconstela/human-readable-var-js/6d7fe8bcd69e8a689400d01744a8cb68ccab5807/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script>
     $(function() {
@@ -71,10 +71,10 @@
               </th>
             </tr>
             <tr>
-              <td style="width:50%">
+              <td class="plain">
                 <code>${JSON.stringify(t.d)}</code>
               </td>
-              <td style="text-align:right">${humanReadable.simple(t.d)}</td>
+              <td class="result">${humanReadable.simple(t.d)}</td>
             </tr>
           </table>`
         )
