@@ -1,5 +1,3 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 ;(function (global) {
   'use strict';
 
@@ -7,8 +5,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * Library version
    * @type {String}
    */
-
-  var version = '0.0.2';
+  let version = '0.0.2'
 
   /**
    * Contains the lib cache
@@ -18,30 +15,34 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    *  collectionName: {name:typesName}
    * }
    */
-  var cache = {};
+  let cache = {}
 
   /**
    * Convert function for each datatype
    *
    * @type {Object}
    */
-  var types = {
+  let types = {
     'Object': {
-      simple: function simple(data) {
-        return '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      simple: (data) => {
+        return '<pre>'+JSON.stringify(data, null, 2)+'</pre>'
       }
     },
     'boolean': { // typeof === 'boolean'
-      simple: function simple(data) {
-        return (data ? '✅ ' : '❌ ') + data;
+      simple: (data) => {
+        return (data ? '✅ ' : '❌ ') +  data
       }
     },
     'address': { // object containing lat & lon properties
-      simple: function simple(data) {
-        return link('https://www.openstreetmap.org/#map=5/', data.lat + '/' + data.lng, '📍 ' + data.lat.toFixed(2) + '/' + data.lng.toFixed(2));
+      simple: (data) => {
+        return link(
+          'https://www.openstreetmap.org/#map=5/',
+          `${data.lat}/${data.lng}`,
+          `📍 ${data.lat.toFixed(2)}/${data.lng.toFixed(2)}`
+        )
       }
     }
-  };
+  }
 
   /**
    * Returns an html a markup
@@ -52,17 +53,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {Object} attrs  a's attributed
    * @return {String}        The a's html markup
    */
-  var link = function link(url, sufix, text, attrs) {
-    if (!attrs) attrs = { target: '_blank' };
-    if (!attrs.target) attrs.target = '_blank';
+  let link = (url, sufix, text, attrs) => {
+    if (!attrs) attrs = {target:'_blank'}
+    if (!attrs.target) attrs.target = '_blank'
 
-    return '<a href="' + url + sufix + '" target="' + attrs.target + '">' + text + '</a>';
-  };
+    return `<a href="${url}${sufix}" target="${attrs.target}">${text}</a>`
+  }
 
   /**
   * @summary Constructor
   */
-  function humanReadable() {
+  function humanReadable () {
     if (!(this instanceof humanReadable)) {
       return new humanReadable();
     }
@@ -78,14 +79,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {String} context The collection name belongs to
    * @return {String}         To stored value
    */
-  var storeCache = function storeCache(value, name, context) {
-    if (!value) return false;
+  let storeCache = (value, name, context) => {
+    if (!value) return false
 
-    if (!cache[context]) cache[context] = {};
-    cache[context][name] = value;
+    if (!cache[context]) cache[context] = {}
+    cache[context][name] = value
 
-    return value;
-  };
+    return value
+  }
 
   /**
    * Given the variable to process, returns its type name and stores the result in
@@ -96,21 +97,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {String} context The collection name belongs to
    * @return {String}         The variable's type
    */
-  var process = function process(data, name, context) {
-    var r = null;
+  let process = (data, name, context) => {
+    let r = null
 
-    var tof = typeof data === 'undefined' ? 'undefined' : _typeof(data);
+    let tof = typeof data
 
     if (tof === 'object') {
-      r = 'Object';
+      r = 'Object'
 
-      if (!!data.lat && !!data.lng) r = 'address';
+      if (!!data.lat && !!data.lng) r = 'address'
     } else if (tof === 'boolean') {
-      r = tof;
+      r = tof
     }
 
-    return name ? storeCache(r, name, context) : r;
-  };
+    return name ? storeCache(r, name, context) : r
+  }
 
   /**
    * Checks if the variable to convert exists in cache and returns it,
@@ -121,10 +122,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {String} context The collection name belongs to
    * @return {Sting}          Returns the value type's name
    */
-  var getType = function getType(value, name, context) {
-    var r = checkCache(value, name, context);
-    return r ? r : process(value, name, context);
-  };
+  let getType = (value, name, context) => {
+    let r = checkCache(value, name, context)
+    return r ? r : process(value, name, context)
+  }
 
   /**
    * Checks if a name exists in cache.
@@ -133,9 +134,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {String} context The collection name belongs to
    * @return {[type]}         [description]
    */
-  var checkCache = function checkCache(name, context) {
-    return !!cache[context] && !!cache[context][name] ? cache[context][name] : false;
-  };
+  let checkCache = (name, context) => {
+    return !!cache[context] && !!cache[context][name] ? cache[context][name] : false
+  }
 
   /**
    * Makes the variable conversion with the 'simple' conversion.
@@ -145,21 +146,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param  {String} context The collection name belongs to
    * @return {String}         The conversion's result
    */
-  humanReadable.prototype.simple = function (value, name, context) {
-    var t = getType(value, name, context);
+  humanReadable.prototype.simple = (value, name, context) => {
+    let t = getType(value, name, context)
 
     if (!!types[t] && !!types[t].simple) {
-      return types[t].simple(value);
+      return types[t].simple(value)
     } else {
-      return value;
+      return value
     }
-  };
+  }
 
   /**
    * Get the library's version
    * @return {String}         The library's version
    */
-  humanReadable.prototype.version = version;
+  humanReadable.prototype.version = version
 
   if (typeof define === 'function' && define.amd) {
     // AMD
@@ -173,6 +174,5 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     //Browser.
     global.humanReadable = humanReadable();
   }
-})(this);
 
-//# sourceMappingURL=index.js.map
+})(this);
