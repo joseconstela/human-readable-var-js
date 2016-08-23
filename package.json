@@ -1,0 +1,27 @@
+{
+  "name": "human-readable-var-js",
+  "version": "0.0.1",
+  "description": "Humanize JS variables",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape 'test/**/*-test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseconstela/human-readable-var-js.git"
+  },
+  "keywords": [
+    "js",
+    "variables",
+    "humanize"
+  ],
+  "devDependencies": {
+    "tape": "4"
+  },
+  "author": "Jose Constela",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joseconstela/human-readable-var-js/issues"
+  },
+  "homepage": "https://github.com/joseconstela/human-readable-var-js#readme"
+}
