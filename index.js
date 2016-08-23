@@ -9,14 +9,14 @@
    *  collectionName: {name:typesName}
    * }
    */
-  var cache = {}
+  let cache = {}
 
   /**
    * Convert function for each datatype
    *
    * @type {Object}
    */
-  var types = {
+  let types = {
     'Object': {
       simple: (data) => {
         return '<pre>'+JSON.stringify(data, null, 2)+'</pre>'
@@ -47,7 +47,7 @@
    * @param  {Object} attrs  a's attributed
    * @return {String}        The a's html markup
    */
-  var link = (url, sufix, text, attrs) => {
+  let link = (url, sufix, text, attrs) => {
     if (!attrs) attrs = {target:'_blank'}
     if (!attrs.target) attrs.target = '_blank'
 
@@ -73,7 +73,7 @@
    * @param  {String} context The collection name belongs to
    * @return {String}         To stored value
    */
-  var storeCache = (value, name, context) => {
+  let storeCache = (value, name, context) => {
     if (!value) return false
 
     if (!cache[context]) cache[context] = {}
@@ -91,10 +91,10 @@
    * @param  {String} context The collection name belongs to
    * @return {String}         The variable's type
    */
-  var process = (data, name, context) => {
-    var r = null
+  let process = (data, name, context) => {
+    let r = null
 
-    var tof = typeof data
+    let tof = typeof data
 
     if (tof === 'object') {
       r = 'Object'
@@ -116,8 +116,8 @@
    * @param  {String} context The collection name belongs to
    * @return {Sting}          Returns the value type's name
    */
-  var getType = (value, name, context) => {
-    var r = checkCache(value, name, context)
+  let getType = (value, name, context) => {
+    let r = checkCache(value, name, context)
     return r ? r : process(value, name, context)
   }
 
@@ -128,7 +128,7 @@
    * @param  {String} context The collection name belongs to
    * @return {[type]}         [description]
    */
-  var checkCache = (name, context) => {
+  let checkCache = (name, context) => {
     return !!cache[context] && !!cache[context][name] ? cache[context][name] : false
   }
 
@@ -141,7 +141,7 @@
    * @return {String}         The conversion's result
    */
   humanReadable.prototype.simple = (value, name, context) => {
-    var t = getType(value, name, context)
+    let t = getType(value, name, context)
 
     if (!!types[t] && !!types[t].simple) {
       return types[t].simple(value)
