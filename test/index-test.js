@@ -3,6 +3,14 @@
 let tape = require('tape'),
     humanReadable = require('../')
 
+tape('Check lib.VERSION against package.json', (test) => {
+  test.equal(
+    humanReadable.version,
+    require('../package.json').version
+  )
+  test.end()
+})
+
 tape('lat-lon', (test) => {
   test.equal(
     humanReadable.simple({lat:0.1, lng: 0.2}),
