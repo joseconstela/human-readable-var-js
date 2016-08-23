@@ -57,9 +57,9 @@
   /**
   * @summary Constructor
   */
-  function Dataguess () {
-    if (!(this instanceof Dataguess)) {
-      return new Dataguess();
+  function humanReadable () {
+    if (!(this instanceof humanReadable)) {
+      return new humanReadable();
     }
 
     return this;
@@ -140,7 +140,7 @@
    * @param  {String} context The collection name belongs to
    * @return {String}         The conversion's result
    */
-  Dataguess.prototype.simple = (value, name, context) => {
+  humanReadable.prototype.simple = (value, name, context) => {
     let t = getType(value, name, context)
 
     if (!!types[t] && !!types[t].simple) {
@@ -153,14 +153,14 @@
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(function () {
-      return Dataguess();
+      return humanReadable();
     });
   } else if (typeof module !== 'undefined' && module.exports) {
     // Node and other CommonJS-like environments that support module.exports.
-    module.exports = Dataguess();
+    module.exports = humanReadable();
   } else {
     //Browser.
-    global.dataguess = Dataguess();
+    global.humanReadable = humanReadable();
   }
 
 })(this);
